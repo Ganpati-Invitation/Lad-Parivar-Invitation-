@@ -1,0 +1,291 @@
+*{box-sizing:border-box}
+:root{
+  --gold:#dca74e;
+  --gold2:#ffd989;
+  --cream:#fff8e8;
+  --brown:#5b351b;
+}
+html{scroll-behavior:smooth;scroll-snap-type:y mandatory;background:#ead9ba}
+body{margin:0;min-height:100%;font-family:"Mukta",sans-serif;color:#fff7e8;background:#ead9ba;overflow-x:hidden}
+body.intro-lock{overflow:hidden;touch-action:none}
+
+.background{position:fixed;inset:0;z-index:0;overflow:hidden;background:linear-gradient(180deg,#f7ecd7,#e7ceb0);pointer-events:none}
+.background-photo{position:absolute;inset:0;background-image:url("background.jpg");background-size:cover;background-position:center;opacity:1}
+.background-wash{position:absolute;inset:0;background:linear-gradient(180deg,rgba(255,248,231,.04),rgba(73,36,11,.18))}
+.light-orb{position:absolute;border-radius:50%;filter:blur(28px);opacity:.22}
+.orb-a{width:240px;height:240px;left:-90px;top:18%;background:#f6cc70;animation:float 9s ease-in-out infinite}
+.orb-b{width:270px;height:270px;right:-110px;bottom:12%;background:#fff0ba;animation:float 11s ease-in-out infinite reverse}
+@keyframes float{50%{transform:translateY(-38px) scale(1.08)}}
+
+/* opening */
+.opening-gate{position:fixed;inset:0;z-index:100;display:grid;place-items:center;overflow:hidden;background:transparent}
+.opening-gate.opened{visibility:hidden;pointer-events:none;transition:visibility .1s linear 1.4s}
+.glass-door{position:absolute;top:0;width:50.2%;height:100%;background:linear-gradient(135deg,rgba(255,255,255,.26),rgba(255,248,232,.09));backdrop-filter:blur(15px) saturate(125%);-webkit-backdrop-filter:blur(15px) saturate(125%);border:1px solid rgba(255,255,255,.34);transition:transform 1.25s cubic-bezier(.72,.02,.18,1)}
+.door-left{left:0;transform-origin:left center}.door-right{right:0;transform-origin:right center}
+.opening-gate.opened .door-left{transform:perspective(1100px) translateX(-104%) rotateY(14deg)}
+.opening-gate.opened .door-right{transform:perspective(1100px) translateX(104%) rotateY(-14deg)}
+.opening-content{position:relative;z-index:3;text-align:center;width:min(90vw,420px);padding:20px;transition:.5s ease}
+.opening-gate.opened .opening-content{opacity:0;transform:scale(.84);filter:blur(6px)}
+.opening-mantra{font-family:"Tiro Devanagari Marathi",serif;color:#7b4c21;font-size:1.15rem}
+.opening-seal{width:min(64vw,280px);aspect-ratio:1;margin:12px auto;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;background:radial-gradient(circle at 35% 28%,#ffe5a4,#d1973c 48%,#8b531f 78%,#603514);border:8px double rgba(255,238,187,.85);box-shadow:0 20px 42px rgba(77,43,16,.32),inset 0 0 28px rgba(74,40,14,.42);color:#4b280f;position:relative;animation:sealFloat 3.2s ease-in-out infinite}
+.seal-ring{position:absolute;inset:12px;border:2px solid rgba(91,49,15,.35);border-radius:50%}
+.seal-ganesh{font-size:4rem;font-family:serif;color:#5c3212}
+.opening-seal strong{font-family:"Yatra One",serif;font-size:1.45rem}
+.opening-seal small{font-size:.76rem;font-weight:700;margin-top:5px}
+@keyframes sealFloat{50%{transform:translateY(-6px) scale(1.012)}}
+.opening-message{font-family:"Tiro Devanagari Marathi",serif;color:#6d482d;line-height:1.6}
+.opening-family{font-family:"Yatra One",serif;color:#6a3c1d;font-size:1.35rem}
+
+/* pages */
+#invitation{position:relative;z-index:5}
+.page{height:100svh;min-height:100svh;scroll-snap-align:start;scroll-snap-stop:always;position:relative;display:flex;align-items:center;justify-content:center;padding:52px 12px 72px;overflow:hidden}
+.glass-card{width:min(92vw,500px);max-height:calc(100svh - 120px);overflow:hidden;padding:20px 17px;border-radius:27px;text-align:center;background:linear-gradient(145deg,rgba(255,255,255,.24),rgba(255,247,229,.10));border:1px solid rgba(255,255,255,.42);box-shadow:inset 0 1px 0 rgba(255,255,255,.40),0 22px 52px rgba(73,38,12,.20);backdrop-filter:blur(18px) saturate(130%);-webkit-backdrop-filter:blur(18px) saturate(130%)}
+.reveal{opacity:0;transform:translateY(42px) scale(.95);filter:blur(5px);transition:.75s ease}
+.reveal.visible{opacity:1;transform:none;filter:none}
+.kicker{margin:0 0 6px;color:#8a571e;font-family:"Tiro Devanagari Marathi",serif;font-weight:700}
+h1,h2,h3{font-family:"Yatra One","Tiro Devanagari Marathi",serif;font-weight:400;color:#6a3819}
+h1{font-size:clamp(2rem,9vw,2.8rem);margin:6px 0}
+h2{font-size:clamp(1.7rem,7.5vw,2.35rem);margin:4px 0 10px}
+.hero-subtitle{color:#6e4e37;margin:0 0 8px}
+.photo-stage{position:relative;width:min(49vw,205px);height:min(49vw,205px);margin:auto;display:grid;place-items:center}
+.ganpati-image{max-width:100%;max-height:100%;object-fit:contain;filter:drop-shadow(0 15px 16px rgba(71,39,14,.23))}
+.photo-placeholder{display:none;width:100%;height:100%;border-radius:50%;place-items:center;align-content:center;background:rgba(255,255,255,.19);border:1px dashed rgba(104,67,29,.28);color:#725033}
+.photo-placeholder span{font-size:2.5rem}.photo-placeholder small{display:block}
+.hero-badges{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin:9px 0}
+.badge{padding:8px;border-radius:15px;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.34)}
+.badge small{display:block;color:#775a43;font-size:.75rem}.badge strong{color:#603a20}
+.invite-copy,.pooja-copy,.final-copy{color:#5e4939;line-height:1.55;font-size:.92rem;margin:9px 0 0}
+.invite-copy strong{color:#7d481e}
+
+/* chain */
+.festival-chain{position:relative;margin-top:12px}.chain-line{position:absolute;top:0;bottom:0;left:50%;width:3px;transform:translateX(-50%);background:linear-gradient(#d79d3f,#7b4b22,#d79d3f);border-radius:5px}
+.chain-item{position:relative;display:flex;min-height:82px;align-items:center;margin:8px 0}
+.chain-item.left{justify-content:flex-start;padding-right:52%}.chain-item.right{justify-content:flex-end;padding-left:52%}
+.chain-node{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:2;width:27px;height:27px;border-radius:50%;display:grid;place-items:center;background:radial-gradient(circle,#fff0ad,#c98e34);color:#5c3317;border:2px solid #fff0bf}
+.chain-box{width:100%;padding:8px 7px;border-radius:15px;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.34)}
+.chain-box small{display:block;color:#76563c;font-size:.70rem}.chain-box strong{display:block;color:#623817;font-family:"Yatra One",serif;font-size:1.08rem}.chain-box p{margin:2px 0 0;color:#6b5441;font-size:.72rem}
+.special{background:rgba(234,181,88,.18)}
+
+/* satyanarayan banana leaf page */
+.satyanarayan-page{background:radial-gradient(circle at center,rgba(255,248,223,.09),transparent 66%)}
+.banana-decor{position:absolute;top:7%;font-size:7rem;opacity:.32;filter:drop-shadow(0 8px 10px rgba(48,74,24,.12));animation:leafSway 3.4s ease-in-out infinite}
+.left-leaves{left:-28px;transform:rotate(-18deg)}.right-leaves{right:-28px;transform:scaleX(-1) rotate(-18deg);animation-delay:.4s}
+@keyframes leafSway{50%{translate:0 8px;rotate:3deg}}
+.pooja-card{border-color:rgba(96,128,55,.30);background:linear-gradient(145deg,rgba(255,255,255,.30),rgba(235,244,206,.13))}
+.toran{font-size:1.2rem;margin-bottom:7px;letter-spacing:.1em}
+.pooja-date,.event-date-box{margin:12px auto;padding:11px 13px;border-radius:17px;background:rgba(255,255,255,.20);border:1px solid rgba(255,255,255,.38);width:min(86%,310px)}
+.pooja-date small,.event-date-box small{display:block;color:#76583b}.pooja-date strong,.event-date-box strong{color:#65401f;font-size:1.05rem}
+.pooja-icons{margin-top:12px;display:flex;justify-content:center;gap:12px;font-size:1.3rem}
+
+/* bhajan */
+.music-wave{font-size:2rem;color:#9d6625;display:flex;justify-content:center;gap:14px;margin:12px 0}
+.music-wave span{animation:noteFloat 1.6s ease-in-out infinite}.music-wave span:nth-child(2){animation-delay:.2s}.music-wave span:nth-child(3){animation-delay:.4s}.music-wave span:nth-child(4){animation-delay:.6s}.music-wave span:nth-child(5){animation-delay:.8s}
+@keyframes noteFloat{50%{transform:translateY(-10px) scale(1.08)}}
+.blessing{margin-top:12px;padding:12px;border-radius:17px;background:rgba(255,255,255,.17);border:1px solid rgba(255,255,255,.34);color:#614a38;font-family:"Tiro Devanagari Marathi",serif}
+
+/* address */
+.address-card{display:flex;gap:12px;text-align:left;padding:14px;border-radius:18px;background:rgba(255,255,255,.20);border:1px solid rgba(255,255,255,.36)}
+.pin{font-size:1.6rem;color:#996221}.address-card strong{color:#653a1d}.address-card p{margin:3px 0 0;color:#624b39;line-height:1.45}
+.contact-card{margin:11px 0;padding:10px;border-radius:16px;background:rgba(255,255,255,.19);border:1px solid rgba(255,255,255,.34)}
+.contact-card small{display:block;color:#76583c}.contact-card a{color:#683a1d;text-decoration:none;font-weight:800;font-size:1.08rem}
+.map-placeholder{padding:12px;border-radius:16px;background:rgba(255,255,255,.14);border:1px dashed rgba(104,67,29,.27);color:#654d3b}.map-placeholder p{margin:4px 0;font-size:.84rem}
+
+/* final */
+.final-om{font-size:3rem;color:#9c641f}.family-sign{font-family:"Yatra One",serif;color:#754517;font-size:1.25rem}
+.primary-button{display:inline-flex;width:100%;justify-content:center;align-items:center;min-height:48px;border:0;border-radius:999px;background:linear-gradient(135deg,#d5a14d,#966127);color:white;font-family:"Mukta",sans-serif;font-weight:800;font-size:1rem;box-shadow:0 10px 22px rgba(76,41,14,.18)}
+
+/* scroll */
+.scroll-cue{position:absolute;bottom:9px;left:50%;transform:translateX(-50%);z-index:20;min-width:124px;min-height:48px;border-radius:999px;border:1px solid rgba(95,62,30,.22);background:rgba(255,255,255,.24);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);box-shadow:0 5px 14px rgba(67,38,14,.12);display:flex;flex-direction:column;align-items:center;justify-content:center;color:#694321}
+.scroll-cue span{font-weight:700;font-size:14px}.scroll-cue b{font-size:29px;line-height:.65;color:#9a6527;animation:bounce 1.2s ease-in-out infinite}
+@keyframes bounce{50%{transform:translateY(4px)}}
+
+@media(max-height:760px){
+  .page{padding-top:42px;padding-bottom:58px}
+  .glass-card{max-height:calc(100svh - 102px);padding-top:14px;padding-bottom:14px}
+  .photo-stage{width:min(37vw,160px);height:min(37vw,160px)}
+  .chain-item{min-height:64px;margin:4px 0}.chain-box p{display:none}
+  .banana-decor{font-size:5rem}
+}
+
+
+/* ===== लाड परिवार: Ganpati PNG intentionally not used ===== */
+.hero-page .glass-card{
+  padding-top:28px !important;
+  padding-bottom:24px !important;
+}
+
+.hero-page h1{
+  margin-top:18px !important;
+}
+
+.hero-page .kicker{
+  margin-bottom:12px !important;
+}
+
+
+/* =========================================================
+   FINAL CLIENT OVERRIDES — uploaded background + glass theme
+   ========================================================= */
+
+html, body {
+  background: #ead4a6 !important;
+}
+
+body {
+  background-image: url("background.jpg") !important;
+  background-size: cover !important;
+  background-position: center center !important;
+  background-repeat: no-repeat !important;
+  background-attachment: fixed !important;
+}
+
+/* Keep the user's original background bright and visible. */
+body::before,
+body::after,
+.site-bg::before,
+.site-bg::after,
+.background-overlay,
+.bg-overlay,
+.page-overlay,
+.dark-overlay {
+  background: transparent !important;
+  background-image: none !important;
+  opacity: 0 !important;
+}
+
+/* Every page uses the same uploaded image without a dark wash. */
+.page,
+.panel,
+.screen,
+section {
+  background-color: transparent !important;
+}
+
+/* Premium clear glass, not dark maroon glass. */
+.glass,
+.glass-card,
+.card,
+.content-card,
+.invitation-card,
+.address-card {
+  background: rgba(255,255,255,.16) !important;
+  border: 1px solid rgba(255,255,255,.46) !important;
+  box-shadow:
+    0 18px 55px rgba(62,35,12,.16),
+    inset 0 1px 0 rgba(255,255,255,.58) !important;
+  -webkit-backdrop-filter: blur(14px) saturate(125%) !important;
+  backdrop-filter: blur(14px) saturate(125%) !important;
+}
+
+/* Exact uploaded golden seal. */
+.seal,
+.seal-image,
+.ancient-seal,
+#ancientSeal,
+.opening-seal img,
+.seal-wrap img {
+  content: url("ancient-seal.png") !important;
+  width: min(68vw, 330px) !important;
+  height: auto !important;
+  object-fit: contain !important;
+  filter: drop-shadow(0 18px 28px rgba(67,35,8,.28)) !important;
+}
+
+/* Premium address presentation — no map UI. */
+#addressText {
+  display: block !important;
+  max-width: 520px !important;
+  margin: 16px auto !important;
+  padding: 22px 20px !important;
+  text-align: center !important;
+  line-height: 1.75 !important;
+  font-weight: 700 !important;
+  color: #fff8e9 !important;
+  background: rgba(66,37,14,.26) !important;
+  border: 1px solid rgba(255,236,190,.55) !important;
+  border-radius: 24px !important;
+  box-shadow: 0 14px 38px rgba(45,25,8,.18), inset 0 1px 0 rgba(255,255,255,.34) !important;
+  -webkit-backdrop-filter: blur(13px) saturate(130%) !important;
+  backdrop-filter: blur(13px) saturate(130%) !important;
+}
+
+#mapButton,
+.map-button,
+.map-preview,
+.map-card,
+.map-section,
+iframe[src*="google"],
+iframe[src*="maps"] {
+  display: none !important;
+}
+
+/* Keep opening curtains/glass transparent over the actual background. */
+.opening-screen,
+.intro-screen,
+.seal-screen,
+.door-left,
+.door-right,
+.curtain-left,
+.curtain-right {
+  background-color: rgba(255,255,255,.08) !important;
+  background-image: none !important;
+  -webkit-backdrop-filter: blur(10px) saturate(120%) !important;
+  backdrop-filter: blur(10px) saturate(120%) !important;
+}
+
+/* Mobile background fix: fixed backgrounds can glitch on phones. */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll !important;
+  }
+}
+
+
+/* ===== FINAL ACTUAL ANCIENT-SEAL.PNG OPENING ===== */
+.opening-seal {
+  position: relative !important;
+  width: min(76vw, 380px) !important;
+  aspect-ratio: 1 / 1 !important;
+  margin: 12px auto !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  cursor: pointer !important;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  border-radius: 50% !important;
+  z-index: 10 !important;
+  animation: sealFloatFinal 3.5s ease-in-out infinite !important;
+}
+
+.ancient-seal-image {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: contain !important;
+  display: block !important;
+  background: transparent !important;
+  filter: drop-shadow(0 15px 25px rgba(0,0,0,.28)) !important;
+  transition: transform .5s cubic-bezier(.2,.8,.2,1), filter .5s ease !important;
+}
+
+.opening-seal:active .ancient-seal-image {
+  transform: scale(1.055) !important;
+  filter: drop-shadow(0 18px 30px rgba(0,0,0,.30)) brightness(1.05) !important;
+}
+
+@keyframes sealFloatFinal {
+  0%,100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-8px) scale(1.015); }
+}
+
+/* Map is intentionally not part of this invitation. */
+.map-placeholder,
+.map-preview,
+.map-button,
+.map-section,
+#mapButton,
+iframe[src*="maps"],
+iframe[src*="google"] {
+  display: none !important;
+}
